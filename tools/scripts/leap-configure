@@ -1267,9 +1267,8 @@ sub __make_symlinks {
         my @sources = $object->files();
         my $attributes = $object->getAllAttributes();
         my $library_extension = "";
-
         # To deal with FPGA VHDL, we make use of VHDL libraries. 
-        if(scalar(keys($attributes))) {
+        if(scalar(keys(%{$attributes}))) {
             if(exists $attributes->{'lib'}) {
                 $library_extension = $attributes->{'lib'} . "/"
             }

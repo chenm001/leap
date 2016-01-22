@@ -432,11 +432,11 @@ sub pythonize_sources {
                               $sourceObject->files();
    
             # do we have any attributes? If so, we need to output them here. 
-            if(scalar(keys($sourceObject->getAllAttributes()))) {
+            if(scalar(keys(%{$sourceObject->getAllAttributes()}))) {
 
                 my @attributes = qw();
 
-                while( my ($attributeKey, $attributeValue) = each $sourceObject->getAllAttributes() ) {
+                while( my ($attributeKey, $attributeValue) = each %{$sourceObject->getAllAttributes()} ) {
                     push(@attributes, "\'$attributeKey\': \'$attributeValue\' ");
                 }
 
