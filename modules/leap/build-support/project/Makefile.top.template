@@ -6,8 +6,8 @@
 ##
 
 #defaults
-PAR:=1
-JOBS:=10
+PAR:=0
+JOBS:=1
 CCACHE:=1
 
 ARGS=
