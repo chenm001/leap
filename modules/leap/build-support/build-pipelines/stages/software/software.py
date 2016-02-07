@@ -113,6 +113,18 @@ class Software():
 
             sw_env['DEFS']['CWD_REL'] = sw_env['DEFS']['ROOT_DIR_SW_MODEL']
 
+            # fix g++ version error on Centos 6.x
+            if (sw_env['CXXVERSION'].split('.')[1] < '5'):
+                if (os.environ.has_key('CC')):
+                    sw_env['CC']=os.environ['CC']
+                else:
+                    sw_env['CC']='gcc_must_be_4.5_and_above'
+
+                if (os.environ.has_key('CXX')):
+                    sw_env['CXX']=os.environ['CXX']
+                else:
+                    sw_env['CXX']='g++_must_be_4.5_and_above'
+
             # this appears to be some secret sauce which works in x86 linux environments,
             # which do not appear to require PIC/relocatable code at link time.  The dynamic loader
             # can instead handle the relinking.  Scons may also have some bug in which it does not 
