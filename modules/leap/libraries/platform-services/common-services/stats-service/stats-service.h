@@ -263,6 +263,8 @@ class STATS_SERVER_CLASS: public RRR_SERVER_CLASS,
     void ReportStat(GLOBAL_STRING_UID desc, UINT32 pos, UINT32 value);
     void NodeInfo(GLOBAL_STRING_UID desc);
     void Ack(UINT8 cmd);
+
+    friend bool lambda_ackReceived();
 };
 
 // server stub

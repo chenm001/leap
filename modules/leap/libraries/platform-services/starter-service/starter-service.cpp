@@ -141,6 +141,11 @@ STARTER_SERVICE_SERVER_CLASS::Start()
     clientStub->Start(0);
 }
 
+static int lambda_hardwareFinished()
+{
+    return hardwareFinished;
+}
+
 // client: WaitForHardware
 UINT8
 STARTER_SERVICE_SERVER_CLASS::WaitForHardware()
@@ -148,7 +153,7 @@ STARTER_SERVICE_SERVER_CLASS::WaitForHardware()
     std::unique_lock<std::mutex> lk(hardwareStatusMutex);
     if(!hardwareFinished)
     {
-        hardwareFinishedSignal.wait(lk, []{ return hardwareFinished; });
+        hardwareFinishedSignal.wait(lk, /*[]{ return hardwareFinished; }*/lambda_hardwareFinished);
     }
 
     return exitCode;

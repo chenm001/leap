@@ -134,6 +134,10 @@ DEBUG_SCAN_SERVER_CLASS::Uninit()
 // RRR request methods
 //
 
+bool lambda_doneReceived()
+{
+    return DEBUG_SCAN_SERVER_CLASS::doneReceived;
+}
 
 //
 // Scan --
@@ -171,7 +175,7 @@ DEBUG_SCAN_SERVER_CLASS::Scan(std::ostream& ofile)
 
     // Block until scan is done.
     std::unique_lock<std::mutex> doneLock(doneMutex);
-    doneCond.wait(doneLock, []{ return doneReceived; });
+    doneCond.wait(doneLock, /*[]{ return doneReceived; }*/lambda_doneReceived);
 
     // Invoke all other registered scanners.
     for (std::list<DEBUG_SCANNER>::iterator s = scanners.begin();

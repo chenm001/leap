@@ -188,6 +188,9 @@ class DEBUG_SCAN_SERVER_CLASS: public RRR_SERVER_CLASS,
 
     // Response from CheckChannelReq()
     void CheckChannelRsp(UINT8 value);
+
+    friend bool lambda_doneReceived();
+
 };
 
 // server stub

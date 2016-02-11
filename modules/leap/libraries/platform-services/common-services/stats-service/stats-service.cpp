@@ -381,6 +381,11 @@ void STATS_SERVER_CLASS::ResetStatValues()
     }
 }
 
+bool lambda_ackReceived()
+{
+    return STATS_SERVER_CLASS::ackReceived;
+}
+
 //
 // SendCommand --
 //     Send a command to the HW service and wait for the ack.
@@ -401,7 +406,7 @@ STATS_SERVER_CLASS::SendCommand(STATS_SERVER_COMMAND cmd)
 
     // Wait for the command to complete (indicated by commandActive clear)
     std::unique_lock<std::mutex> ackLock(ackMutex);
-    ackCond.wait(ackLock, []{ return ackReceived; });
+    ackCond.wait(ackLock, /*[]{ return ackReceived; }*/lambda_ackReceived);
 }
 
 
